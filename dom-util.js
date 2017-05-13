@@ -7,7 +7,7 @@ const visitAllNodes = function(node, callback) {
       visitAllNodes(children[i], callback);
     }
   }
-  callback(children);
+  callback(node);
 };
 
 const flattenTreeToArray = function(node) {
