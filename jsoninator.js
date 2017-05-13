@@ -1,13 +1,27 @@
 const _ = require('underscore'); // the real one! :)
 
-// This is what you would do if you liked things to be easy:
-// const stringify = JSON.stringify;
-// But you don't. So you're going to write it from scratch...
-
-
-
 const stringify = function(obj) {
-  // your code goes here
+  let arr = [];
+
+  if (obj === null) {
+     return 'null';
+   } else if (typeof obj === 'string') {
+     return '"' + obj + '"';
+   } else if (typeof obj === 'number') {
+     return obj.toString();
+   } else if (typeof obj === 'boolean') {
+     return '' + obj;
+   } else if (_.isArray(obj)) {
+       _.each(obj, element => {
+         arr.push(stringify(element));
+    })
+    return '[' + arr + ']';
+   } else if (typeof (obj) === 'object') {
+     _.each(obj, (value, key) => {
+       arr.push(stringify(key) + ":" + stringify(value));
+     });
+     return '{' + arr + '}';
+ };
 };
 
 module.exports = {
